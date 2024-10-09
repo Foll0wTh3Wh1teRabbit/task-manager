@@ -9,3 +9,6 @@ dependencies {
     implementation 'io.jsonwebtoken:jjwt-jackson:0.12.6'
     implementation 'org.apache.commons:commons-lang3'
 }
+
+jar.enabled = true
+bootJar.enabled = false
