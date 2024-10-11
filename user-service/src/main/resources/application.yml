@@ -12,7 +12,7 @@ spring:
     hikari:
       username: postgres
       password: postgres
-    url: jdbc:postgresql://localhost:5432/task-manager-db
+    url: jdbc:postgresql://postgres:5432/task-manager-db
   jpa:
     hibernate:
       ddl-auto: update
