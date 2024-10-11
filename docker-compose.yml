@@ -18,7 +18,8 @@ services:
   user-service-1:
     container_name: user-service-1
     build:
-      dockerfile: user-service/Dockerfile
+      context: user-service
+      dockerfile: Dockerfile
     ports:
       - 11001:8080
     depends_on:
@@ -27,7 +28,8 @@ services:
   user-service-2:
     container_name: user-service-2
     build:
-      dockerfile: user-service/Dockerfile
+      context: user-service
+      dockerfile: Dockerfile
     ports:
       - 11002:8080
     depends_on:
