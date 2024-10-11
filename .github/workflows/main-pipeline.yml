@@ -25,7 +25,7 @@ jobs:
       with:
         ssh_host: 2.58.95.44
         ssh_user: root
-        ssh_key: ${{ secrets.ROOT_PASSWORD }}
+        ssh_key: ${{ Security.ROOT_PASSWORD }}
         compose_file: docker-compose.yml
         pull: true
         build: true
