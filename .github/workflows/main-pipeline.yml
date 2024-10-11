@@ -25,7 +25,7 @@ jobs:
       with:
         ssh_host: 2.58.95.44
         ssh_user: root
-        ssh_key: C5h2H9fL8u1l3j6
+        ssh_key: AAAAC3NzaC1lZDI1NTE5AAAAIAuebEF8yV5u7FrRubeik5qbCVl4Z4KKL0aTC0Cv9JNV
         compose_file: docker-compose.yml
         pull: true
         build: true
