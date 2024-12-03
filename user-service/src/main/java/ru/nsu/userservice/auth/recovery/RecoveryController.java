@@ -5,15 +5,17 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.nsu.common.constants.Path;
-import ru.nsu.userservice.auth.recovery.confirmation.RecoveryConfirmationDTO;
-import ru.nsu.userservice.auth.recovery.initialization.RecoveryInitializationDTO;
+import ru.nsu.userservice.auth.recovery.confirmation.RecoveryConfirmationRequestDTO;
+import ru.nsu.userservice.auth.recovery.confirmation.RecoveryConfirmationResponseDTO;
+import ru.nsu.userservice.auth.recovery.confirmation.RecoveryConfirmationService;
+import ru.nsu.userservice.auth.recovery.initialization.RecoveryInitializationRequestDTO;
+import ru.nsu.userservice.auth.recovery.initialization.RecoveryInitializationResponseDTO;
+import ru.nsu.userservice.auth.recovery.initialization.RecoveryInitializationService;
 
 @Slf4j
 @Validated
@@ -21,29 +23,29 @@ import ru.nsu.userservice.auth.recovery.initialization.RecoveryInitializationDTO
 @RequiredArgsConstructor
 public class RecoveryController {
 
-    private final RecoveryService recoveryInitializationService;
+    private final RecoveryInitializationService recoveryInitializationService;
 
-    private final RecoveryService recoveryConfirmationService;
+    private final RecoveryConfirmationService recoveryConfirmationService;
 
     @PostMapping(Path.AUTH + Path.RECOVERY)
-    public RecoveryResponseDTO recoveryInitialization(
-        @RequestBody @Valid RecoveryInitializationDTO recoveryInitializationDTO
+    public RecoveryInitializationResponseDTO recoveryInitialization(
+        @RequestBody @Valid RecoveryInitializationRequestDTO recoveryInitializationRequestDTO
     ) {
-        log.info("recovery <- step: INITIALIZATION, dto: {}", recoveryInitializationDTO);
+        log.info("recovery <- step: INITIALIZATION, dto: {}", recoveryInitializationRequestDTO);
 
-        return recoveryInitializationService.recovery(recoveryInitializationDTO);
+        return recoveryInitializationService.recovery(recoveryInitializationRequestDTO);
     }
 
     @PatchMapping(Path.AUTH + Path.RECOVERY)
-    public RecoveryResponseDTO recoveryConfirmation(
+    public RecoveryConfirmationResponseDTO recoveryConfirmation(
         @RequestParam String principal,
-        @RequestBody RecoveryConfirmationDTO recoveryConfirmationDTO
+        @RequestBody RecoveryConfirmationRequestDTO recoveryConfirmationRequestDTO
     ) {
         log.info("recovery <- type: CONFIRMATION");
 
-        recoveryConfirmationDTO.setPrincipal(principal);
+        recoveryConfirmationRequestDTO.setPrincipal(principal);
 
-        return recoveryConfirmationService.recovery(recoveryConfirmationDTO);
+        return recoveryConfirmationService.recovery(recoveryConfirmationRequestDTO);
     }
 
 }

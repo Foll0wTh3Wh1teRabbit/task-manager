@@ -14,8 +14,8 @@ import ru.nsu.common.constants.Path;
 public class LogoutController {
 
     @PostMapping(Path.AUTH + Path.LOGOUT)
-    public LogoutResponseDTO logout(@RequestBody @Valid LogoutDTO logoutDTO) {
-        log.info("logout <- dto: {}", logoutDTO);
+    public LogoutResponseDTO logout(@RequestBody @Valid LogoutRequestDTO logoutRequestDTO) {
+        log.info("logout <- dto: {}", logoutRequestDTO);
 
         return new LogoutResponseDTO();
     }
