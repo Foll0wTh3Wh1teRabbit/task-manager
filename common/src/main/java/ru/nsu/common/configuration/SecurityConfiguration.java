@@ -16,8 +16,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import ru.nsu.common.filter.LongTtlJwtAuthenticationFilter;
-import ru.nsu.common.constants.Path;
 import ru.nsu.common.filter.ShortTtlJwtAuthenticationFilter;
+
+import static ru.nsu.common.constants.Path.*;
 
 @Configuration
 @EnableWebSecurity
@@ -26,10 +27,10 @@ import ru.nsu.common.filter.ShortTtlJwtAuthenticationFilter;
 public class SecurityConfiguration {
 
     private static final String[] allPermittedRequests = {
-        Path.AUTH + Path.LOGIN + Path.IN_APP,
-        Path.AUTH + Path.LOGOUT + Path.ALL_ENDPOINTS,
-        Path.AUTH + Path.RECOVERY,
-        Path.AUTH + Path.REGISTER + Path.ALL_ENDPOINTS
+        AUTH + LOGIN + IN_APP,
+        AUTH + LOGOUT + ALL_ENDPOINTS,
+        AUTH + RECOVERY,
+        AUTH + REGISTER + ALL_ENDPOINTS
     };
 
     private final ShortTtlJwtAuthenticationFilter shortTtlJwtAuthenticationFilter;

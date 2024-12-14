@@ -5,10 +5,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
-import ru.nsu.common.constants.Parameters;
-import ru.nsu.common.constants.Path;
 
 import java.util.function.UnaryOperator;
+
+import static ru.nsu.common.constants.Parameters.*;
+import static ru.nsu.common.constants.Path.*;
 
 @Service
 @RequiredArgsConstructor
@@ -57,13 +58,15 @@ public class EmailService {
             message.setTo(recipient);
             message.setSubject(CONFIRMATION_SUBJECT);
 
-            String confirmationLink = baseUrl + Path.AUTH + Path.CONFIRMATION + Parameters.PRINCIPAL_URI + token;
+            String confirmationLink = baseUrl + AUTH + CONFIRMATION + PRINCIPAL_URI + token;
             message.setText(CONFIRMATION_CONTENT.apply(confirmationLink));
 
             mailSender.send(message);
         }
 
     }
+
+
 
     private class RecoveryEmailSenderDelegate {
 
@@ -90,7 +93,7 @@ public class EmailService {
             message.setTo(recipient);
             message.setSubject(RECOVERY_SUBJECT);
 
-            String confirmationLink = baseUrl + Path.AUTH + Path.RECOVERY + Parameters.PRINCIPAL_URI + token;
+            String confirmationLink = baseUrl + AUTH + RECOVERY + PRINCIPAL_URI + token;
             message.setText(CONFIRMATION_CONTENT.apply(confirmationLink));
 
             mailSender.send(message);

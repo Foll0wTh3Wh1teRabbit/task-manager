@@ -4,12 +4,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import ru.nsu.common.constants.TokenTimeToLive;
 import ru.nsu.common.model.User;
-import ru.nsu.common.model.UserStatus;
 import ru.nsu.common.repository.UserRepository;
 import ru.nsu.common.service.EmailService;
 import ru.nsu.common.service.JwtService;
+
+import static ru.nsu.common.constants.TokenTimeToLive.*;
+import static ru.nsu.common.model.User.UserStatus.*;
 
 @Slf4j
 @Service
@@ -25,12 +26,12 @@ public class RecoveryInitializationServiceImpl implements RecoveryInitialization
     @Override
     public RecoveryInitializationResponseDTO recovery(RecoveryInitializationRequestDTO recoveryDTO) {
         User user =  userRepository.findByEmail(recoveryDTO.getEmail())
-            .filter(foundUser -> UserStatus.CONFIRMED.equals(foundUser.getStatus()))
+            .filter(foundUser -> CONFIRMED.equals(foundUser.getStatus()))
             .orElseThrow(
                 () -> new UsernameNotFoundException("User with email " + recoveryDTO.getEmail() + " is not found")
             );
 
-        String shortTimeToLiveToken = jwtService.generateToken(user, TokenTimeToLive.SHORT_TIME_TO_LIVE);
+        String shortTimeToLiveToken = jwtService.generateToken(user, SHORT_TIME_TO_LIVE);
 
         emailService.sendRecoveryEmail(recoveryDTO.getEmail(), shortTimeToLiveToken);
 

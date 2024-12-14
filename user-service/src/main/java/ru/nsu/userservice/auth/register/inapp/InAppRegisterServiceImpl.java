@@ -5,12 +5,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.nsu.common.constants.TokenTimeToLive;
 import ru.nsu.common.service.EmailService;
 import ru.nsu.common.service.JwtService;
 import ru.nsu.common.model.User;
-import ru.nsu.common.model.UserStatus;
 import ru.nsu.common.repository.UserRepository;
+
+import static ru.nsu.common.constants.TokenTimeToLive.*;
+import static ru.nsu.common.model.User.UserStatus.*;
 
 @Slf4j
 @Service
@@ -31,7 +32,7 @@ public class InAppRegisterServiceImpl implements InAppRegisterService {
         User user = createUser(registerDTO);
         userRepository.save(user);
 
-        String shortTimeToLiveToken = jwtService.generateToken(user, TokenTimeToLive.SHORT_TIME_TO_LIVE);
+        String shortTimeToLiveToken = jwtService.generateToken(user, SHORT_TIME_TO_LIVE);
         emailService.sendConfirmationEmail(user.getEmail(), shortTimeToLiveToken);
 
         return new InAppRegisterResponseDTO(registerDTO.getEmail());
@@ -45,7 +46,7 @@ public class InAppRegisterServiceImpl implements InAppRegisterService {
                 inAppRegisterRequestDTO.getPassword()
             )
         );
-        user.setStatus(UserStatus.NOT_CONFIRMED);
+        user.setStatus(NOT_CONFIRMED);
 
         return user;
     }

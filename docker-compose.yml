@@ -2,11 +2,13 @@ version: '3.3'
 
 services:
   nginx:
+    container_name: nginx
     image: nginx
     ports:
-      - 8080:80
+      - 9090:80
 
   postgres:
+    container_name: postgres
     image: postgres
     environment:
       POSTGRES_DB: task-manager-db
@@ -15,23 +17,64 @@ services:
     ports:
       - 5432:5432
 
-  user-service-1:
-    container_name: user-service-1
+  task-manager-service-1:
+    container_name: task-manager-service-1
     build:
-      context: user-service
+      context: task-manager-service
       dockerfile: Dockerfile
     ports:
       - 11001:8080
     depends_on:
       - nginx
       - postgres
-  user-service-2:
-    container_name: user-service-2
+  task-manager-service-2:
+    container_name: task-manager-service-2
     build:
-      context: user-service
+      context: task-manager-service
       dockerfile: Dockerfile
     ports:
       - 11002:8080
+    depends_on:
+      - nginx
+      - postgres
+
+  planning-service-1:
+    container_name: planning-service-1
+    build:
+      context: planning-service
+      dockerfile: Dockerfile
+    ports:
+      - 11101:8080
+    depends_on:
+      - nginx
+      - postgres
+  planning-service-2:
+    container_name: planning-service-2
+    build:
+      context: planning-service
+      dockerfile: Dockerfile
+    ports:
+      - 11102:8080
+    depends_on:
+      - nginx
+      - postgres
+  planning-service-3:
+    container_name: planning-service-3
+    build:
+      context: planning-service
+      dockerfile: Dockerfile
+    ports:
+      - 11103:8080
+    depends_on:
+      - nginx
+      - postgres
+  planning-service-4:
+    container_name: planning-service-4
+    build:
+      context: planning-service
+      dockerfile: Dockerfile
+    ports:
+      - 11104:8080
     depends_on:
       - nginx
       - postgres

@@ -15,11 +15,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import ru.nsu.common.constants.Parameters;
 import ru.nsu.common.service.JwtService;
 
 import java.io.IOException;
 import java.util.Optional;
+
+import static ru.nsu.common.constants.Parameters.*;
 
 @Component
 @RequiredArgsConstructor
@@ -36,7 +37,7 @@ public class ShortTtlJwtAuthenticationFilter extends OncePerRequestFilter {
         @NonNull FilterChain filterChain
     ) throws ServletException, IOException {
         String jwt = Optional.of(request)
-            .map(req -> req.getParameter(Parameters.PRINCIPAL_PARAM))
+            .map(req -> req.getParameter(PRINCIPAL_PARAM))
             .filter(StringUtils::isNotBlank)
             .orElse(null);
 

@@ -5,10 +5,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import ru.nsu.common.constants.TokenTimeToLive;
 import ru.nsu.common.model.User;
 import ru.nsu.common.repository.UserRepository;
 import ru.nsu.common.service.JwtService;
+
+import static ru.nsu.common.constants.TokenTimeToLive.*;
 
 @Slf4j
 @Service
@@ -31,7 +32,7 @@ public class EmailChangeServiceImpl implements EmailChangeService {
         user.setEmail(changeDTO.getNewEmail());
         userRepository.save(user);
 
-        String newLongTimeToLiveToken = jwtService.generateToken(user, TokenTimeToLive.LONG_TIME_TO_LIVE);
+        String newLongTimeToLiveToken = jwtService.generateToken(user, LONG_TIME_TO_LIVE);
 
         return new EmailChangeResponseDTO(newLongTimeToLiveToken);
     }

@@ -5,11 +5,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import ru.nsu.common.constants.TokenTimeToLive;
 import ru.nsu.common.model.User;
-import ru.nsu.common.model.UserStatus;
 import ru.nsu.common.repository.UserRepository;
 import ru.nsu.common.service.JwtService;
+
+import static ru.nsu.common.constants.TokenTimeToLive.*;
+import static ru.nsu.common.model.User.UserStatus.*;
 
 @Slf4j
 @Service
@@ -25,10 +26,10 @@ public class EmailConfirmationServiceImpl implements EmailConfirmationService {
     public EmailConfirmationResponseDTO confirmation(EmailConfirmationRequestDTO confirmationDTO) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        user.setStatus(UserStatus.CONFIRMED);
+        user.setStatus(CONFIRMED);
         userRepository.save(user);
 
-        String longTimeToLiveToken = jwtService.generateToken(user, TokenTimeToLive.LONG_TIME_TO_LIVE);
+        String longTimeToLiveToken = jwtService.generateToken(user, LONG_TIME_TO_LIVE);
 
         return new EmailConfirmationResponseDTO(longTimeToLiveToken);
     }
