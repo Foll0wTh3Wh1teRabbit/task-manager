@@ -1,10 +1,12 @@
 package ru.nsu.userservice.auth.register.inapp;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.experimental.FieldDefaults;
+import lombok.NoArgsConstructor;
 
 @Data
-@FieldDefaults(makeFinal = true)
+@NoArgsConstructor
+@AllArgsConstructor
 public class InAppRegisterResponseDTO {
 
     private String email;

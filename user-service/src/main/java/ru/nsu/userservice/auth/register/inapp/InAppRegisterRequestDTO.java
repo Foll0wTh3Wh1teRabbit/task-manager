@@ -2,13 +2,16 @@ package ru.nsu.userservice.auth.register.inapp;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.validator.constraints.Length;
 
 @Data
-@FieldDefaults(makeFinal = true)
+@NoArgsConstructor
+@AllArgsConstructor
 public class InAppRegisterRequestDTO {
 
     @NotEmpty(

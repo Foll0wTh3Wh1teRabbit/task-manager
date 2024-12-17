@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import ru.nsu.common.constants.Path;
 import ru.nsu.userservice.auth.login.inapp.InAppLoginRequestDTO;
 import ru.nsu.userservice.auth.login.inapp.InAppLoginResponseDTO;
 import ru.nsu.userservice.auth.login.inapp.InAppLoginService;
@@ -26,14 +25,14 @@ public class LoginController {
 
     private final QrCodeLoginService qrCodeLoginService;
 
-    @PostMapping(value = AUTH + LOGIN + IN_APP)
+    @PostMapping(value = AUTH_IN_APP_LOGIN_ENDPOINT)
     public InAppLoginResponseDTO loginInApp(@RequestBody @Valid InAppLoginRequestDTO inAppLoginRequestDTO) {
         log.info("login <- type: IN_APP, dto: {}", inAppLoginRequestDTO);
 
         return inAppLoginService.login(inAppLoginRequestDTO);
     }
 
-    @PostMapping(value = AUTH + LOGIN + QR_CODE)
+    @PostMapping(value = AUTH_QR_CODE_LOGIN_ENDPOINT)
     public QrCodeLoginResponseDTO loginQRCode(@RequestParam String principal) {
         log.info("login <- type: QR_CODE, principal: {}", principal);
 

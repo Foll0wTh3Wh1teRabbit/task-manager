@@ -2,11 +2,15 @@ package ru.nsu.userservice.auth.recovery.confirmation;
 
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotEmpty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.validator.constraints.Length;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class RecoveryConfirmationRequestDTO {
 
     @Nullable

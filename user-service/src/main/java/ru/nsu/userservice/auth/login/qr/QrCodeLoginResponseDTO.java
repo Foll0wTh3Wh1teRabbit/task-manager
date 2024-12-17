@@ -1,10 +1,13 @@
 package ru.nsu.userservice.auth.login.qr;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 @Data
-@FieldDefaults(makeFinal = true)
+@NoArgsConstructor
+@AllArgsConstructor
 public class QrCodeLoginResponseDTO {
 
     private String principal;

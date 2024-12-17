@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.nsu.common.model.User;
 import ru.nsu.common.repository.UserRepository;
 import ru.nsu.common.service.EmailService;
@@ -14,6 +15,7 @@ import static ru.nsu.common.model.User.UserStatus.*;
 
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class RecoveryInitializationServiceImpl implements RecoveryInitializationService {
 

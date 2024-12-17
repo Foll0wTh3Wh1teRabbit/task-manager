@@ -1,14 +1,17 @@
 package ru.nsu.taskservice.task;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
+import ru.nsu.taskservice.task.create.TaskCreateRequestDTO;
+import ru.nsu.taskservice.task.create.TaskCreateResponseDTO;
+import ru.nsu.taskservice.task.delete.TaskDeleteRequestDTO;
+import ru.nsu.taskservice.task.update.TaskUpdateRequestDTO;
+import ru.nsu.taskservice.task.update.TaskUpdateResponseDTO;
 
-@Slf4j
-@Component
-@RequiredArgsConstructor
-public class TaskFacade {
+public interface TaskFacade {
 
+    TaskCreateResponseDTO createTask(TaskCreateRequestDTO createRequestDTO);
 
+    TaskUpdateResponseDTO updateTask(TaskUpdateRequestDTO updateRequestDTO);
+
+    void deleteTask(TaskDeleteRequestDTO deleteRequestDTO);
 
 }

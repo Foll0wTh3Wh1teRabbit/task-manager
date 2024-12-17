@@ -1,10 +1,13 @@
 package ru.nsu.userservice.auth.confirmation.email;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 @Data
-@FieldDefaults(makeFinal = true)
+@NoArgsConstructor
+@AllArgsConstructor
 public class EmailConfirmationResponseDTO {
 
     private String principal;

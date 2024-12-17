@@ -27,10 +27,9 @@ import static ru.nsu.common.constants.Path.*;
 public class SecurityConfiguration {
 
     private static final String[] allPermittedRequests = {
-        AUTH + LOGIN + IN_APP,
-        AUTH + LOGOUT + ALL_ENDPOINTS,
-        AUTH + RECOVERY,
-        AUTH + REGISTER + ALL_ENDPOINTS
+        AUTH_IN_APP_REGISTER_ENDPOINT,
+        AUTH_IN_APP_LOGIN_ENDPOINT,
+        AUTH_RECOVERY_ENDPOINT,
     };
 
     private final ShortTtlJwtAuthenticationFilter shortTtlJwtAuthenticationFilter;

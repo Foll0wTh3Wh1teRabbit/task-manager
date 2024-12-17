@@ -4,7 +4,7 @@ import lombok.experimental.FieldDefaults;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
-@FieldDefaults(makeFinal = true)
+
 public class UserServiceTestConstants {
 
     public String VALID_EMAIL = "nkosarev4392@gmail.com";

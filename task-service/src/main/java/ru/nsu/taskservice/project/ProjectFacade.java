@@ -1,14 +1,19 @@
 package ru.nsu.taskservice.project;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
+import ru.nsu.taskservice.project.create.ProjectCreateRequestDTO;
+import ru.nsu.taskservice.project.create.ProjectCreateResponseDTO;
+import ru.nsu.taskservice.project.fetch.ProjectFetchResponseDTO;
+import ru.nsu.taskservice.project.update.ProjectUpdateRequestDTO;
+import ru.nsu.taskservice.project.update.ProjectUpdateResponseDTO;
 
-@Slf4j
-@Component
-@RequiredArgsConstructor
-public class ProjectFacade {
+public interface ProjectFacade {
 
+    ProjectCreateResponseDTO createProject(ProjectCreateRequestDTO projectCreateRequestDTO, String principal);
 
+    ProjectFetchResponseDTO fetchProjects(Long projectId, String principal);
+
+    ProjectUpdateResponseDTO updateProject(ProjectUpdateRequestDTO projectUpdateRequestDTO, String principal);
+
+    void deleteProject(Long projectId, String principal);
 
 }

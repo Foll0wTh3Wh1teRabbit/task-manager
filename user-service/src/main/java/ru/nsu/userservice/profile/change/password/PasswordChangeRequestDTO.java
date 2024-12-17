@@ -1,13 +1,16 @@
 package ru.nsu.userservice.profile.change.password;
 
 import jakarta.validation.constraints.NotEmpty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.validator.constraints.Length;
 
 @Data
-@FieldDefaults(makeFinal = true)
+@NoArgsConstructor
+@AllArgsConstructor
 public class PasswordChangeRequestDTO {
 
     @NotEmpty(

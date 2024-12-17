@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import ru.nsu.common.constants.Path;
 import ru.nsu.userservice.auth.recovery.confirmation.RecoveryConfirmationRequestDTO;
 import ru.nsu.userservice.auth.recovery.confirmation.RecoveryConfirmationResponseDTO;
 import ru.nsu.userservice.auth.recovery.confirmation.RecoveryConfirmationService;
@@ -29,7 +28,7 @@ public class RecoveryController {
 
     private final RecoveryConfirmationService recoveryConfirmationService;
 
-    @PostMapping(value = AUTH + RECOVERY)
+    @PostMapping(value = AUTH_RECOVERY_ENDPOINT)
     public RecoveryInitializationResponseDTO recoveryInitialization(
         @RequestBody @Valid RecoveryInitializationRequestDTO recoveryInitializationRequestDTO
     ) {
@@ -38,7 +37,7 @@ public class RecoveryController {
         return recoveryInitializationService.recovery(recoveryInitializationRequestDTO);
     }
 
-    @PatchMapping(value = AUTH + RECOVERY)
+    @PatchMapping(value = AUTH_RECOVERY_ENDPOINT)
     public RecoveryConfirmationResponseDTO recoveryConfirmation(
         @RequestParam String principal,
         @RequestBody RecoveryConfirmationRequestDTO recoveryConfirmationRequestDTO

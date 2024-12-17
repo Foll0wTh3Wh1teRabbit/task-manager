@@ -1,10 +1,12 @@
 package ru.nsu.userservice.profile.change.password;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.experimental.FieldDefaults;
+import lombok.NoArgsConstructor;
 
 @Data
-@FieldDefaults(makeFinal = true)
+@NoArgsConstructor
+@AllArgsConstructor
 public class PasswordChangeResponseDTO {
 
     private String principal;

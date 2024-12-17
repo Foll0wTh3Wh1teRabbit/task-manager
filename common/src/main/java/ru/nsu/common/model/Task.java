@@ -18,6 +18,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ru.nsu.common.enumerated.TaskPriority;
 
 import java.time.ZonedDateTime;
 import java.util.Set;
@@ -44,12 +45,15 @@ public class Task {
     private TaskPriority priority;
 
     @Column(name = "estimated_time", nullable = false)
-    private ZonedDateTime estimatedTime;
+    private Long estimatedTime;
 
     @Column(name = "deadline_time", nullable = false)
     private ZonedDateTime deadlineTime;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @Column(name = "is_completed", nullable = false)
+    private Boolean isCompleted;
+
+    @ManyToOne
     @JoinColumn(name = "project_id", referencedColumnName = "id", nullable = false)
     private Project project;
 
@@ -68,19 +72,5 @@ public class Task {
         orphanRemoval = true
     )
     private Set<Relation> relationsTo;
-
-
-
-    public enum TaskPriority {
-
-        CRITICAL,
-
-        SEVERE,
-
-        NORMAL,
-
-        LOW
-
-    }
 
 }

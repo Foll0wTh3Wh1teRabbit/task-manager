@@ -1,6 +1,5 @@
 package ru.nsu.common.model;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -16,6 +15,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ru.nsu.common.enumerated.RelationType;
 
 @Entity
 @Builder
@@ -35,26 +35,12 @@ public class Relation {
     @Column(name = "relation_type", nullable = false)
     private RelationType relationType;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "task_from_id", referencedColumnName = "id", nullable = false)
     private Task taskFrom;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "task_to_id", referencedColumnName = "id", nullable = false)
     private Task taskTo;
-
-
-
-    public enum RelationType {
-
-        PRECEDES,
-
-        FOLLOWS,
-
-        IS_PART_OF,
-
-        CONTAINS
-
-    }
 
 }

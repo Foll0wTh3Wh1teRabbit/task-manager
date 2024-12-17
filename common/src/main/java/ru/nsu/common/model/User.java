@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,6 +22,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -32,6 +34,8 @@ import java.util.Set;
 @AllArgsConstructor
 @Table(name = "users")
 public class User implements UserDetails {
+
+    private static final String DEFAULT_TASKS_LIST_PROJECT_NAME = "Список задач";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -71,6 +75,17 @@ public class User implements UserDetails {
     @Override
     public String getPassword() {
         return this.password;
+    }
+
+    @PrePersist
+    public void prePersist() {
+        this.projects = new HashSet<>();
+
+        Project project = new Project();
+        project.setName(DEFAULT_TASKS_LIST_PROJECT_NAME);
+        project.setUser(this);
+
+        this.projects.add(project);
     }
 
 

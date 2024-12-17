@@ -31,6 +31,15 @@ public class EmailService {
         new RecoveryEmailSenderDelegate(recipient, token).sendEmail();
     }
 
+    public void sendEmailChangedEmail(String recipient, String newEmailAddress) {
+        new ChangeEmailSenderDelegate(recipient, newEmailAddress).sendEmail();
+        new ChangeEmailSenderDelegate(newEmailAddress, newEmailAddress).sendEmail();
+    }
+
+    public void sendPasswordChangedEmail(String recipient) {
+        new ChangePasswordSenderDelegate(recipient).sendEmail();
+    }
+
 
 
     private class ConfirmationEmailSenderDelegate {
@@ -58,7 +67,7 @@ public class EmailService {
             message.setTo(recipient);
             message.setSubject(CONFIRMATION_SUBJECT);
 
-            String confirmationLink = baseUrl + AUTH + CONFIRMATION + PRINCIPAL_URI + token;
+            String confirmationLink = baseUrl + AUTH_CONFIRMATION_ENDPOINT + PRINCIPAL_URI + token;
             message.setText(CONFIRMATION_CONTENT.apply(confirmationLink));
 
             mailSender.send(message);
@@ -72,7 +81,7 @@ public class EmailService {
 
         private static final String RECOVERY_SUBJECT = "Link for account recovery";
 
-        private static final UnaryOperator<String> CONFIRMATION_CONTENT =
+        private static final UnaryOperator<String> RECOVERY_CONTENT =
             link -> String.format(
                 "Hello!\n\nYour recovery link is %s\n\nPlease, follow the link as soon as possible.", link
             );
@@ -93,8 +102,70 @@ public class EmailService {
             message.setTo(recipient);
             message.setSubject(RECOVERY_SUBJECT);
 
-            String confirmationLink = baseUrl + AUTH + RECOVERY + PRINCIPAL_URI + token;
-            message.setText(CONFIRMATION_CONTENT.apply(confirmationLink));
+            String confirmationLink = baseUrl + AUTH_RECOVERY_ENDPOINT + PRINCIPAL_URI + token;
+            message.setText(RECOVERY_CONTENT.apply(confirmationLink));
+
+            mailSender.send(message);
+        }
+
+    }
+
+
+
+    private class ChangeEmailSenderDelegate {
+
+        private static final String CHANGE_EMAIL_SUBJECT = "Your email has been changed";
+
+        private static final UnaryOperator<String> CHANGE_EMAIL_CONTENT =
+            newAddress -> String.format(
+                "Hello!\n\nYour account email-address has been changed to %s", newAddress
+            );
+
+        private final String recipient;
+
+        private final String address;
+
+        public ChangeEmailSenderDelegate(String recipient, String address) {
+            this.recipient = recipient;
+            this.address = address;
+        }
+
+        void sendEmail() {
+            SimpleMailMessage message = new SimpleMailMessage();
+
+            message.setFrom(from);
+            message.setTo(recipient);
+            message.setSubject(CHANGE_EMAIL_SUBJECT);
+
+            message.setText(CHANGE_EMAIL_CONTENT.apply(address));
+
+            mailSender.send(message);
+        }
+
+    }
+
+
+
+    private class ChangePasswordSenderDelegate {
+
+        private static final String CHANGE_PASSWORD_SUBJECT = "Your password has been changed";
+
+        private static final String CHANGE_PASSWORD_CONTENT = "Hello!\n\nYour account email-address has been changed";
+
+        private final String recipient;
+
+        public ChangePasswordSenderDelegate(String recipient) {
+            this.recipient = recipient;
+        }
+
+        void sendEmail() {
+            SimpleMailMessage message = new SimpleMailMessage();
+
+            message.setFrom(from);
+            message.setTo(recipient);
+            message.setSubject(CHANGE_PASSWORD_SUBJECT);
+
+            message.setText(CHANGE_PASSWORD_CONTENT);
 
             mailSender.send(message);
         }

@@ -9,10 +9,9 @@ import com.google.zxing.qrcode.QRCodeWriter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ru.nsu.common.model.User;
-import ru.nsu.common.repository.UserRepository;
+import ru.nsu.common.service.CustomUserDetailsService;
 import ru.nsu.common.service.JwtService;
 
 import java.io.ByteArrayOutputStream;
@@ -39,7 +38,7 @@ public class LoginQrGenerateServiceImpl implements LoginQrGenerateService {
 
     private final JwtService jwtService;
 
-    private final UserRepository userRepository;
+    private final CustomUserDetailsService customUserDetailsService;
 
     @Value("${application.base-url}")
     private String baseUrl;
@@ -47,13 +46,10 @@ public class LoginQrGenerateServiceImpl implements LoginQrGenerateService {
     @Override
     public byte[] generateQrCode(String principal) throws WriterException, IOException {
         String username = jwtService.extractUsername(principal);
-        User user = userRepository.findByEmail(username)
-            .orElseThrow(
-                () -> new UsernameNotFoundException("User with email " + username + " is not found")
-            );
+        User user = customUserDetailsService.loadUserByUsername(username);
 
         String shortTimeToLiveToken = jwtService.generateToken(user, SHORT_TIME_TO_LIVE);
-        String pathToLoginViaQrCode = baseUrl + AUTH + LOGIN + QR_CODE + PRINCIPAL_URI + shortTimeToLiveToken;
+        String pathToLoginViaQrCode = baseUrl + AUTH_QR_CODE_LOGIN_ENDPOINT + PRINCIPAL_URI + shortTimeToLiveToken;
 
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
         BitMatrix bitMatrix = qrCodeWriter.encode(

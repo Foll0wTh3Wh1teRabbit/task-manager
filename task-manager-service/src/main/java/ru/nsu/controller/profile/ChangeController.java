@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
-import ru.nsu.common.constants.Path;
 import ru.nsu.userservice.profile.change.email.EmailChangeRequestDTO;
 import ru.nsu.userservice.profile.change.email.EmailChangeResponseDTO;
 import ru.nsu.userservice.profile.change.email.EmailChangeService;
@@ -28,24 +27,24 @@ public class ChangeController {
 
     private final PasswordChangeService passwordChangeService;
 
-    @PatchMapping(value = PROFILE + CHANGE + EMAIL)
+    @PatchMapping(value = PROFILE_CHANGE_EMAIL_ENDPOINT)
     public EmailChangeResponseDTO changeEmail(
         @RequestHeader("Authorization") String principal,
         @RequestBody @Valid EmailChangeRequestDTO emailChangeRequestDTO
     ) {
         log.info("change <- type: EMAIL, dto: {}", emailChangeRequestDTO);
 
-        return emailChangeService.change(principal, emailChangeRequestDTO);
+        return emailChangeService.changeEmail(principal, emailChangeRequestDTO);
     }
 
-    @PatchMapping(value = PROFILE + CHANGE + PASSWORD)
+    @PatchMapping(value = PROFILE_CHANGE_PASSWORD_ENDPOINT)
     public PasswordChangeResponseDTO changePassword(
         @RequestHeader("Authorization") String principal,
         @RequestBody @Valid PasswordChangeRequestDTO passwordChangeRequestDTO
     ) {
         log.info("change <- type: PASSWORD");
 
-        return passwordChangeService.change(principal, passwordChangeRequestDTO);
+        return passwordChangeService.changePassword(principal, passwordChangeRequestDTO);
     }
 
 }

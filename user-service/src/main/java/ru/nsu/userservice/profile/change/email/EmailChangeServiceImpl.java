@@ -3,10 +3,11 @@ package ru.nsu.userservice.profile.change.email;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ru.nsu.common.model.User;
 import ru.nsu.common.repository.UserRepository;
+import ru.nsu.common.service.CustomUserDetailsService;
+import ru.nsu.common.service.EmailService;
 import ru.nsu.common.service.JwtService;
 
 import static ru.nsu.common.constants.TokenTimeToLive.*;
@@ -19,18 +20,25 @@ public class EmailChangeServiceImpl implements EmailChangeService {
 
     private final JwtService jwtService;
 
+    private final CustomUserDetailsService customUserDetailsService;
+
     private final UserRepository userRepository;
 
-    @Override
-    public EmailChangeResponseDTO change(String principal, EmailChangeRequestDTO changeDTO) {
-        String username = jwtService.extractUsername(principal);
-        User user = userRepository.findByEmail(username)
-            .orElseThrow(
-                () -> new UsernameNotFoundException("User with email " + username + " is not found")
-            );
+    private final EmailService emailService;
 
-        user.setEmail(changeDTO.getNewEmail());
+    @Override
+    public EmailChangeResponseDTO changeEmail(String principal, EmailChangeRequestDTO changeDTO) {
+        String username = jwtService.extractUsername(principal);
+        User user = customUserDetailsService.loadUserByUsername(username);
+
+        String oldEmail = user.getEmail();
+        String newEmail = changeDTO.getNewEmail();
+
+        user.setEmail(newEmail);
         userRepository.save(user);
+
+        emailService.sendEmailChangedEmail(oldEmail, newEmail);
+        emailService.sendEmailChangedEmail(newEmail, newEmail);
 
         String newLongTimeToLiveToken = jwtService.generateToken(user, LONG_TIME_TO_LIVE);
 
