@@ -9,7 +9,7 @@ import ru.nsu.userservice.auth.confirmation.email.EmailConfirmationRequestDTO;
 import ru.nsu.userservice.auth.confirmation.email.EmailConfirmationResponseDTO;
 import ru.nsu.userservice.auth.confirmation.email.EmailConfirmationService;
 
-import static ru.nsu.common.constants.Path.*;
+import static ru.nsu.common.constants.Path.AUTH_CONFIRMATION_ENDPOINT;
 
 @Slf4j
 @RestController

@@ -9,8 +9,8 @@ import ru.nsu.common.model.User;
 import ru.nsu.common.repository.UserRepository;
 import ru.nsu.common.service.JwtService;
 
-import static ru.nsu.common.constants.TokenTimeToLive.*;
-import static ru.nsu.common.model.User.UserStatus.*;
+import static ru.nsu.common.constants.TokenTimeToLive.LONG_TIME_TO_LIVE;
+import static ru.nsu.common.model.User.UserStatus.CONFIRMED;
 
 @Slf4j
 @Service

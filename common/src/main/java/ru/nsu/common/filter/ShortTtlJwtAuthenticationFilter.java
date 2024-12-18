@@ -20,7 +20,7 @@ import ru.nsu.common.service.JwtService;
 import java.io.IOException;
 import java.util.Optional;
 
-import static ru.nsu.common.constants.Parameters.*;
+import static ru.nsu.common.constants.Parameters.PRINCIPAL_PARAM;
 
 @Component
 @RequiredArgsConstructor

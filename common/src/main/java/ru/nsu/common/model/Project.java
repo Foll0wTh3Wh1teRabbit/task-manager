@@ -17,9 +17,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ru.nsu.common.dto.RelationDTO;
 import ru.nsu.common.dto.TaskDTO;
-import ru.nsu.common.mapper.RelationMapper;
 import ru.nsu.common.mapper.TaskMapper;
 
 import java.util.HashSet;

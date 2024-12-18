@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import ru.nsu.common.model.User;
 import ru.nsu.common.service.JwtService;
 
-import static ru.nsu.common.constants.TokenTimeToLive.*;
+import static ru.nsu.common.constants.TokenTimeToLive.LONG_TIME_TO_LIVE;
 
 @Slf4j
 @Service

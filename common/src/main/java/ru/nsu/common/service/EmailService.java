@@ -8,8 +8,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.function.UnaryOperator;
 
-import static ru.nsu.common.constants.Parameters.*;
-import static ru.nsu.common.constants.Path.*;
+import static ru.nsu.common.constants.Parameters.PRINCIPAL_URI;
+import static ru.nsu.common.constants.Path.AUTH_CONFIRMATION_ENDPOINT;
+import static ru.nsu.common.constants.Path.AUTH_RECOVERY_ENDPOINT;
 
 @Service
 @RequiredArgsConstructor

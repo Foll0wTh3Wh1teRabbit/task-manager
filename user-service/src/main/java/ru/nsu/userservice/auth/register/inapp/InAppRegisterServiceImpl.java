@@ -5,13 +5,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.nsu.common.service.EmailService;
-import ru.nsu.common.service.JwtService;
 import ru.nsu.common.model.User;
 import ru.nsu.common.repository.UserRepository;
+import ru.nsu.common.service.EmailService;
+import ru.nsu.common.service.JwtService;
 
-import static ru.nsu.common.constants.TokenTimeToLive.*;
-import static ru.nsu.common.model.User.UserStatus.*;
+import static ru.nsu.common.constants.TokenTimeToLive.SHORT_TIME_TO_LIVE;
+import static ru.nsu.common.model.User.UserStatus.NOT_CONFIRMED;
 
 @Slf4j
 @Service

@@ -17,9 +17,9 @@ import ru.nsu.common.service.JwtService;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-import static ru.nsu.common.constants.Parameters.*;
-import static ru.nsu.common.constants.Path.*;
-import static ru.nsu.common.constants.TokenTimeToLive.*;
+import static ru.nsu.common.constants.Parameters.PRINCIPAL_URI;
+import static ru.nsu.common.constants.Path.AUTH_QR_CODE_LOGIN_ENDPOINT;
+import static ru.nsu.common.constants.TokenTimeToLive.SHORT_TIME_TO_LIVE;
 
 @Slf4j
 @Service

@@ -14,7 +14,8 @@ import ru.nsu.userservice.auth.login.qr.QrCodeLoginRequestDTO;
 import ru.nsu.userservice.auth.login.qr.QrCodeLoginResponseDTO;
 import ru.nsu.userservice.auth.login.qr.QrCodeLoginService;
 
-import static ru.nsu.common.constants.Path.*;
+import static ru.nsu.common.constants.Path.AUTH_IN_APP_LOGIN_ENDPOINT;
+import static ru.nsu.common.constants.Path.AUTH_QR_CODE_LOGIN_ENDPOINT;
 
 @Slf4j
 @RestController

@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import ru.nsu.common.enumerated.TaskPriority;
 
 import java.time.ZonedDateTime;
-import java.util.List;
 import java.util.Set;
 
 @Data

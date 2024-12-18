@@ -11,8 +11,8 @@ import ru.nsu.userservice.profile.qr.LoginQrGenerateService;
 
 import java.io.IOException;
 
-import static org.springframework.http.MediaType.*;
-import static ru.nsu.common.constants.Path.*;
+import static org.springframework.http.MediaType.IMAGE_JPEG_VALUE;
+import static ru.nsu.common.constants.Path.PROFILE_GENERATE_QR_CODE_ENDPOINT;
 
 @Slf4j
 @RestController

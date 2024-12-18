@@ -16,7 +16,7 @@ import ru.nsu.userservice.auth.recovery.initialization.RecoveryInitializationReq
 import ru.nsu.userservice.auth.recovery.initialization.RecoveryInitializationResponseDTO;
 import ru.nsu.userservice.auth.recovery.initialization.RecoveryInitializationService;
 
-import static ru.nsu.common.constants.Path.*;
+import static ru.nsu.common.constants.Path.AUTH_RECOVERY_ENDPOINT;
 
 @Slf4j
 @Validated

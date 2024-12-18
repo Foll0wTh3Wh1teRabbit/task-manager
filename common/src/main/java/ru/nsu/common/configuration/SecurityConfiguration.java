@@ -18,7 +18,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import ru.nsu.common.filter.LongTtlJwtAuthenticationFilter;
 import ru.nsu.common.filter.ShortTtlJwtAuthenticationFilter;
 
-import static ru.nsu.common.constants.Path.*;
+import static ru.nsu.common.constants.Path.AUTH_IN_APP_LOGIN_ENDPOINT;
+import static ru.nsu.common.constants.Path.AUTH_IN_APP_REGISTER_ENDPOINT;
+import static ru.nsu.common.constants.Path.AUTH_RECOVERY_ENDPOINT;
 
 @Configuration
 @EnableWebSecurity

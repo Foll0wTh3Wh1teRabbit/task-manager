@@ -10,7 +10,7 @@ import ru.nsu.common.service.CustomUserDetailsService;
 import ru.nsu.common.service.EmailService;
 import ru.nsu.common.service.JwtService;
 
-import static ru.nsu.common.constants.TokenTimeToLive.*;
+import static ru.nsu.common.constants.TokenTimeToLive.LONG_TIME_TO_LIVE;
 
 @Slf4j
 @Service

@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static ru.nsu.common.constants.Path.*;
+import static ru.nsu.common.constants.Path.AUTH_LOGOUT_ENDPOINT;
 
 @Slf4j
 @RestController

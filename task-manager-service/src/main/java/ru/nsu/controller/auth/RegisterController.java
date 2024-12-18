@@ -11,7 +11,7 @@ import ru.nsu.userservice.auth.register.inapp.InAppRegisterRequestDTO;
 import ru.nsu.userservice.auth.register.inapp.InAppRegisterResponseDTO;
 import ru.nsu.userservice.auth.register.inapp.InAppRegisterService;
 
-import static ru.nsu.common.constants.Path.*;
+import static ru.nsu.common.constants.Path.AUTH_IN_APP_REGISTER_ENDPOINT;
 
 @Slf4j
 @Validated
