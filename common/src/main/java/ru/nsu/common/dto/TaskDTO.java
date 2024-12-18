@@ -7,6 +7,7 @@ import ru.nsu.common.enumerated.TaskPriority;
 
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -24,5 +25,7 @@ public class TaskDTO {
     private ZonedDateTime deadlineTime;
 
     private Boolean isCompleted;
+
+    private Set<RelationDTO> relations;
 
 }

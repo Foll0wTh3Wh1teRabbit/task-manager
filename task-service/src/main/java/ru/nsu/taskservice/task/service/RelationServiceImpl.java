@@ -7,13 +7,12 @@ import ru.nsu.common.dto.RelationDTO;
 import ru.nsu.common.dto.UnboundRelationDTO;
 import ru.nsu.common.model.Project;
 import ru.nsu.common.model.Task;
-import ru.nsu.common.repository.RelationRepository;
 import ru.nsu.common.repository.TaskRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+// TODO refactor
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -21,12 +20,10 @@ public class RelationServiceImpl implements RelationService {
 
     private final TaskRepository taskRepository;
 
-    private final RelationRepository relationRepository;
-
     private final RelationInconsistencyCheckerService relationInconsistencyCheckerService;
 
     @Override
-    public List<RelationDTO> modifyRelations(
+    public void modifyRelations(
         Long taskId,
         List<RelationDTO> relationsToRemove,
         List<UnboundRelationDTO> relationsToAdd
@@ -34,7 +31,7 @@ public class RelationServiceImpl implements RelationService {
         Task task = taskRepository.findById(taskId)
             .orElseThrow(() -> new IllegalArgumentException("Task not found"));
 
-        removeRelations(task, relationsToRemove);
+        removeRelations(relationsToRemove);
         addRelations(task, relationsToAdd);
 
         Project project = task.getProject();
@@ -45,10 +42,10 @@ public class RelationServiceImpl implements RelationService {
             throw new IllegalStateException("Tasks graph is not consistent");
         }
 
-        return new ArrayList<>();
+        taskRepository.saveAndFlush(task);
     }
 
-    private void removeRelations(Task task, List<RelationDTO> relationsToRemove) {
+    private void removeRelations(List<RelationDTO> relationsToRemove) {
 
     }
 

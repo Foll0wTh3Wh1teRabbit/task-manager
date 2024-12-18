@@ -41,7 +41,7 @@ public class PasswordChangeServiceImpl implements PasswordChangeService {
         }
 
         user.setPassword(passwordEncoder.encode(changeDTO.getNewPassword()));
-        userRepository.save(user);
+        userRepository.saveAndFlush(user);
 
         emailService.sendPasswordChangedEmail(user.getEmail());
 

@@ -9,7 +9,6 @@ import ru.nsu.common.dto.TaskDTO;
 import ru.nsu.common.dto.UnboundRelationDTO;
 import ru.nsu.taskservice.task.create.TaskCreateRequestDTO;
 import ru.nsu.taskservice.task.create.TaskCreateResponseDTO;
-import ru.nsu.taskservice.task.delete.TaskDeleteRequestDTO;
 import ru.nsu.taskservice.task.service.RelationService;
 import ru.nsu.taskservice.task.service.TaskService;
 import ru.nsu.taskservice.task.update.TaskUpdateRequestDTO;
@@ -36,9 +35,9 @@ public class TaskFacadeImpl implements TaskFacade {
         Long taskId = task.getId();
         List<UnboundRelationDTO> unboundRelations = taskCreateRequestDTO.getRelationsToAdd();
 
-        List<RelationDTO> relations = relationService.modifyRelations(taskId, null, unboundRelations);
+        relationService.modifyRelations(taskId, null, unboundRelations);
 
-        return new TaskCreateResponseDTO(task, relations);
+        return new TaskCreateResponseDTO(task);
     }
 
     @Override
@@ -48,14 +47,15 @@ public class TaskFacadeImpl implements TaskFacade {
         List<UnboundRelationDTO> relationsToAdd = taskUpdateRequestDTO.getRelationsToAdd();
 
         TaskDTO task = taskService.updateTask(taskUpdateRequestDTO, taskId);
-        List<RelationDTO> relations = relationService.modifyRelations(taskId, relationsToRemove, relationsToAdd);
 
-        return new TaskUpdateResponseDTO(task, relations);
+        relationService.modifyRelations(taskId, relationsToRemove, relationsToAdd);
+
+        return new TaskUpdateResponseDTO(task);
     }
 
     @Override
-    public void deleteTask(TaskDeleteRequestDTO taskDeleteRequestDTO) {
-        taskService.deleteTask(taskDeleteRequestDTO.getTaskId());
+    public void deleteTask(Long taskId) {
+        taskService.deleteTask(taskId);
     }
 
 }

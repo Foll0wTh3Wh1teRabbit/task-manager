@@ -27,7 +27,7 @@ public class EmailConfirmationServiceImpl implements EmailConfirmationService {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         user.setStatus(CONFIRMED);
-        userRepository.save(user);
+        userRepository.saveAndFlush(user);
 
         String longTimeToLiveToken = jwtService.generateToken(user, LONG_TIME_TO_LIVE);
 

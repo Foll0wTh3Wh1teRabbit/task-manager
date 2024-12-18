@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.nsu.common.constants.Path;
 import ru.nsu.taskservice.task.TaskFacade;
 import ru.nsu.taskservice.task.create.TaskCreateRequestDTO;
 import ru.nsu.taskservice.task.create.TaskCreateResponseDTO;
-import ru.nsu.taskservice.task.delete.TaskDeleteRequestDTO;
 import ru.nsu.taskservice.task.update.TaskUpdateRequestDTO;
 import ru.nsu.taskservice.task.update.TaskUpdateResponseDTO;
 
@@ -40,10 +40,10 @@ public class TaskController {
     }
 
     @DeleteMapping(value = Path.TASK_DELETE_ENDPOINT)
-    public void deleteTask(@RequestBody @Valid TaskDeleteRequestDTO deleteRequestDTO) {
-        log.info("deleteTask <- dto: {}", deleteRequestDTO);
+    public void deleteTask(@RequestParam Long taskId) {
+        log.info("deleteTask <- id: {}", taskId);
 
-        taskFacade.deleteTask(deleteRequestDTO);
+        taskFacade.deleteTask(taskId);
     }
 
 }

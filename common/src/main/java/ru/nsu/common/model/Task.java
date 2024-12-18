@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,6 +22,7 @@ import lombok.Setter;
 import ru.nsu.common.enumerated.TaskPriority;
 
 import java.time.ZonedDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -72,5 +74,11 @@ public class Task {
         orphanRemoval = true
     )
     private Set<Relation> relationsTo;
+
+    @PrePersist
+    public void prePersist() {
+        this.relationsFrom = new HashSet<>();
+        this.relationsTo = new HashSet<>();
+    }
 
 }

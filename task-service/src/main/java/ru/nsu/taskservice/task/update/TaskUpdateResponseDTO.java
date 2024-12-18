@@ -16,6 +16,4 @@ public class TaskUpdateResponseDTO {
 
     private TaskDTO task;
 
-    private List<RelationDTO> relations;
-
 }

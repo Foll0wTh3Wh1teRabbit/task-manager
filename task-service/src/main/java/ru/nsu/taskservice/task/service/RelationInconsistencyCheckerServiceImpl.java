@@ -14,7 +14,7 @@ public class RelationInconsistencyCheckerServiceImpl implements RelationInconsis
 
     @Override
     public boolean isTasksGraphConsistent(Set<Task> tasks) {
-        return false;
+        return true;
     }
 
 }

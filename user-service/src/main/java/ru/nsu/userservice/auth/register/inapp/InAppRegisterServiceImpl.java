@@ -30,7 +30,7 @@ public class InAppRegisterServiceImpl implements InAppRegisterService {
     @Override
     public InAppRegisterResponseDTO register(InAppRegisterRequestDTO registerDTO) {
         User user = createUser(registerDTO);
-        userRepository.save(user);
+        userRepository.saveAndFlush(user);
 
         String shortTimeToLiveToken = jwtService.generateToken(user, SHORT_TIME_TO_LIVE);
         emailService.sendConfirmationEmail(user.getEmail(), shortTimeToLiveToken);

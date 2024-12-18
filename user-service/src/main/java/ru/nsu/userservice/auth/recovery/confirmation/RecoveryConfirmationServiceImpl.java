@@ -28,7 +28,7 @@ public class RecoveryConfirmationServiceImpl implements RecoveryConfirmationServ
         String username = user.getUsername();
 
         user.setPassword(passwordEncoder.encode(recoveryDTO.getNewPassword()));
-        userRepository.save(user);
+        userRepository.saveAndFlush(user);
 
         return new RecoveryConfirmationResponseDTO(username);
     }

@@ -6,13 +6,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import ru.nsu.common.dto.ProjectDTO;
+import ru.nsu.common.mapper.ProjectMapper;
 import ru.nsu.common.model.Project;
 import ru.nsu.common.model.User;
 import ru.nsu.common.repository.ProjectRepository;
 import ru.nsu.taskservice.project.create.ProjectCreateRequestDTO;
 import ru.nsu.taskservice.project.update.ProjectUpdateRequestDTO;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,11 +29,10 @@ public class ProjectServiceImpl implements ProjectService {
 
         project.setUser(user);
         project.setName(projectCreateRequestDTO.getProjectName());
-        project.setTasks(new HashSet<>());
 
         projectRepository.saveAndFlush(project);
 
-        return new ProjectDTO(project.getId(), project.getName(), project.getTasks());
+        return ProjectMapper.toProjectDTO(project);
     }
 
     @Override
@@ -51,7 +50,7 @@ public class ProjectServiceImpl implements ProjectService {
         List<Project> projects = projectRepository.findAll(projectFilterSpecification);
 
         return projects.stream()
-            .map(pr -> new ProjectDTO(pr.getId(), pr.getName(), pr.getTasks()))
+            .map(ProjectMapper::toProjectDTO)
             .toList();
     }
 
@@ -69,7 +68,7 @@ public class ProjectServiceImpl implements ProjectService {
 
         projectRepository.saveAndFlush(project);
 
-        return new ProjectDTO(project.getId(), project.getName(), project.getTasks());
+        return ProjectMapper.toProjectDTO(project);
     }
 
     @Override

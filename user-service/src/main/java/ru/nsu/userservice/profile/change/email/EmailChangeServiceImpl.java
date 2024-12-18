@@ -35,7 +35,7 @@ public class EmailChangeServiceImpl implements EmailChangeService {
         String newEmail = changeDTO.getNewEmail();
 
         user.setEmail(newEmail);
-        userRepository.save(user);
+        userRepository.saveAndFlush(user);
 
         emailService.sendEmailChangedEmail(oldEmail, newEmail);
         emailService.sendEmailChangedEmail(newEmail, newEmail);

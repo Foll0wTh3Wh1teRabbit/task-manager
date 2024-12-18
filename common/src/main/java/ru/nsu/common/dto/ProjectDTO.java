@@ -16,6 +16,6 @@ public class ProjectDTO {
 
     private String name;
 
-    private Set<Task> tasks; // TODO TaskDTO
+    private Set<TaskDTO> tasks;
 
 }

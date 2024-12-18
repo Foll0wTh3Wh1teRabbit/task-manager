@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.nsu.common.dto.TaskDTO;
+import ru.nsu.common.mapper.TaskMapper;
 import ru.nsu.common.model.Project;
 import ru.nsu.common.model.Task;
 import ru.nsu.common.repository.ProjectRepository;
@@ -36,14 +37,7 @@ public class TaskServiceImpl implements TaskService {
 
         taskRepository.saveAndFlush(task);
 
-        return new TaskDTO(
-            task.getId(),
-            task.getName(),
-            task.getPriority(),
-            task.getEstimatedTime(),
-            task.getDeadlineTime(),
-            false
-        );
+        return TaskMapper.toTaskDTO(task);
     }
 
     @Override
@@ -57,14 +51,9 @@ public class TaskServiceImpl implements TaskService {
         task.setDeadlineTime(taskUpdateRequestDTO.getDeadlineTime());
         task.setIsCompleted(taskUpdateRequestDTO.getIsCompleted());
 
-        return new TaskDTO(
-            task.getId(),
-            task.getName(),
-            task.getPriority(),
-            task.getEstimatedTime(),
-            task.getDeadlineTime(),
-            task.getIsCompleted()
-        );
+        taskRepository.saveAndFlush(task);
+
+        return TaskMapper.toTaskDTO(task);
     }
 
     @Override

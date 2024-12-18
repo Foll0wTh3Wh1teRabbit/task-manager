@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface RelationService {
 
-    List<RelationDTO> modifyRelations(
+    void modifyRelations(
         Long taskId,
         List<RelationDTO> relationsToRemove,
         List<UnboundRelationDTO> relationsToAdd

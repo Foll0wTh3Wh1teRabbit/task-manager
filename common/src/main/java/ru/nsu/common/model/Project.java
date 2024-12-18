@@ -10,14 +10,21 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ru.nsu.common.dto.RelationDTO;
+import ru.nsu.common.dto.TaskDTO;
+import ru.nsu.common.mapper.RelationMapper;
+import ru.nsu.common.mapper.TaskMapper;
 
+import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Builder
@@ -47,5 +54,17 @@ public class Project {
         orphanRemoval = true
     )
     private Set<Task> tasks;
+
+    @PrePersist
+    public void prePersist() {
+        this.tasks = new HashSet<>();
+    }
+
+    public Set<TaskDTO> getTasksOfProject() {
+        return this.getTasks()
+            .stream()
+            .map(TaskMapper::toTaskDTO)
+            .collect(Collectors.toSet());
+    }
 
 }
