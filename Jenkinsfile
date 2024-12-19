@@ -19,10 +19,12 @@ pipeline {
             }
         }
 
-        steps('Deploy') {
+        stage('Deploy') { // Исправлено: Используем "stage" вместо "steps"
             steps {
                 sh """
-
+                echo "Deploying application..."
+                docker-compose down
+                docker-compose up -d
                 """
             }
         }
