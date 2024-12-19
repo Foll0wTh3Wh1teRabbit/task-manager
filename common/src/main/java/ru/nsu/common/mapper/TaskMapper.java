@@ -6,7 +6,6 @@ import ru.nsu.common.model.Task;
 
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class TaskMapper {
 
@@ -20,12 +19,18 @@ public class TaskMapper {
         taskDTO.setDeadlineTime(task.getDeadlineTime());
         taskDTO.setIsCompleted(task.getIsCompleted());
 
-        Set<RelationDTO> relations = Stream.of(task.getRelationsFrom(), task.getRelationsTo())
-            .flatMap(Set::stream)
+        Set<RelationDTO> relationsFrom = task.getRelationsFrom()
+            .stream()
             .map(RelationMapper::toRelationDTO)
             .collect(Collectors.toSet());
 
-        taskDTO.setRelations(relations);
+        Set<RelationDTO> relationsTo = task.getRelationsTo()
+            .stream()
+            .map(RelationMapper::toRelationDTO)
+            .collect(Collectors.toSet());
+
+        taskDTO.setRelationsFrom(relationsFrom);
+        taskDTO.setRelationsTo(relationsTo);
 
         return taskDTO;
     }

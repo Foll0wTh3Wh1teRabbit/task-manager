@@ -22,8 +22,8 @@ public class TaskServiceImpl implements TaskService {
     private final TaskRepository taskRepository;
 
     @Override
-    public TaskDTO createTask(TaskCreateRequestDTO taskCreateRequestDTO, Long projectId) {
-        Project project = projectRepository.findById(projectId)
+    public TaskDTO createTask(TaskCreateRequestDTO taskCreateRequestDTO) {
+        Project project = projectRepository.findById(taskCreateRequestDTO.getProjectId())
             .orElseThrow(() -> new IllegalArgumentException("Project not found"));
 
         Task task = new Task();
@@ -41,8 +41,8 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public TaskDTO updateTask(TaskUpdateRequestDTO taskUpdateRequestDTO, Long taskId) {
-        Task task = taskRepository.findById(taskId)
+    public TaskDTO updateTask(TaskUpdateRequestDTO taskUpdateRequestDTO) {
+        Task task = taskRepository.findById(taskUpdateRequestDTO.getTaskId())
             .orElseThrow(() -> new IllegalArgumentException("Task not found"));
 
         task.setName(taskUpdateRequestDTO.getName());

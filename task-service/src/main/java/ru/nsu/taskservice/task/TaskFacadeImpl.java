@@ -16,6 +16,7 @@ import ru.nsu.taskservice.task.update.TaskUpdateResponseDTO;
 
 import java.util.List;
 
+// TODO refactor and fix
 @Slf4j
 @Component
 @Transactional
@@ -28,29 +29,31 @@ public class TaskFacadeImpl implements TaskFacade {
 
     @Override
     public TaskCreateResponseDTO createTask(TaskCreateRequestDTO taskCreateRequestDTO) {
-        Long projectId = taskCreateRequestDTO.getProjectId();
+        TaskDTO taskWithoutRelations = taskService.createTask(taskCreateRequestDTO);
 
-        TaskDTO task = taskService.createTask(taskCreateRequestDTO, projectId);
-
-        Long taskId = task.getId();
+        Long taskId = taskWithoutRelations.getId();
         List<UnboundRelationDTO> unboundRelations = taskCreateRequestDTO.getRelationsToAdd();
 
-        relationService.modifyRelations(taskId, null, unboundRelations);
+        TaskDTO taskWithRelations = relationService.modifyRelations(
+            taskId,
+            null,
+            unboundRelations
+        );
 
-        return new TaskCreateResponseDTO(task);
+        return new TaskCreateResponseDTO(taskWithRelations);
     }
 
     @Override
     public TaskUpdateResponseDTO updateTask(TaskUpdateRequestDTO taskUpdateRequestDTO) {
-        Long taskId = taskUpdateRequestDTO.getTaskId();
+        TaskDTO taskWithoutRelations = taskService.updateTask(taskUpdateRequestDTO);
+
+        Long taskId = taskWithoutRelations.getId();
         List<RelationDTO> relationsToRemove = taskUpdateRequestDTO.getRelationsToRemove();
         List<UnboundRelationDTO> relationsToAdd = taskUpdateRequestDTO.getRelationsToAdd();
 
-        TaskDTO task = taskService.updateTask(taskUpdateRequestDTO, taskId);
+        TaskDTO taskWithRelations = relationService.modifyRelations(taskId, relationsToRemove, relationsToAdd);
 
-        relationService.modifyRelations(taskId, relationsToRemove, relationsToAdd);
-
-        return new TaskUpdateResponseDTO(task);
+        return new TaskUpdateResponseDTO(taskWithRelations);
     }
 
     @Override

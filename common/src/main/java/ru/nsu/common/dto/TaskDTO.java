@@ -25,6 +25,8 @@ public class TaskDTO {
 
     private Boolean isCompleted;
 
-    private Set<RelationDTO> relations;
+    private Set<RelationDTO> relationsFrom;
+
+    private Set<RelationDTO> relationsTo;
 
 }

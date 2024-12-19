@@ -6,9 +6,9 @@ import ru.nsu.taskservice.task.update.TaskUpdateRequestDTO;
 
 public interface TaskService {
 
-    TaskDTO createTask(TaskCreateRequestDTO taskCreateRequestDTO, Long projectId);
+    TaskDTO createTask(TaskCreateRequestDTO taskCreateRequestDTO);
 
-    TaskDTO updateTask(TaskUpdateRequestDTO taskUpdateRequestDTO, Long taskId);
+    TaskDTO updateTask(TaskUpdateRequestDTO taskUpdateRequestDTO);
 
     void deleteTask(Long taskId);
 
