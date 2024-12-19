@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/Foll0wTh3Wh1teRabbit/task-manager.git'
+                git branch: 'main', url: 'https://github.com/Foll0wTh3Wh1teRabbit/task-manager.git'
             }
         }
 
@@ -19,7 +19,7 @@ pipeline {
             }
         }
 
-        stage('Deploy') { // Исправлено: Используем "stage" вместо "steps"
+        stage('Deploy') {
             steps {
                 sh """
                 echo "Deploying application..."
