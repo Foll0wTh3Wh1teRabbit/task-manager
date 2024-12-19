@@ -17,3 +17,6 @@ dependencies {
 
     implementation 'com.hazelcast:hazelcast-spring'
 }
+
+jar.enabled = false
+bootJar.enabled = true

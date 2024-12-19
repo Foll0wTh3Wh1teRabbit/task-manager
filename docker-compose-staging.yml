@@ -1,0 +1,74 @@
+version: '3.3'
+
+services:
+  nginx:
+    container_name: nginx
+    image: nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "9090:80"
+    env_file:
+      - .env.staging
+    depends_on:
+      - postgres
+      - task-manager-service-1
+      - task-manager-service-2
+      - planning-service-1
+      - planning-service-2
+      - planning-service-3
+      - planning-service-4
+
+  postgres:
+    container_name: postgres
+    image: postgres
+    env_file:
+      - .env.staging
+
+  task-manager-service-1:
+    container_name: task-manager-service-1
+    build:
+      context: task-manager-service
+      dockerfile: Dockerfile
+    env_file:
+      - .env.staging
+    depends_on:
+      - postgres
+  task-manager-service-2:
+    container_name: task-manager-service-2
+    build:
+      context: task-manager-service
+      dockerfile: Dockerfile
+    env_file:
+      - .env.staging
+    depends_on:
+      - postgres
+
+  planning-service-1:
+    container_name: planning-service-1
+    build:
+      context: planning-service
+      dockerfile: Dockerfile
+    env_file:
+      - .env.staging
+  planning-service-2:
+    container_name: planning-service-2
+    build:
+      context: planning-service
+      dockerfile: Dockerfile
+    env_file:
+      - .env.staging
+  planning-service-3:
+    container_name: planning-service-3
+    build:
+      context: planning-service
+      dockerfile: Dockerfile
+    env_file:
+      - .env.staging
+  planning-service-4:
+    container_name: planning-service-4
+    build:
+      context: planning-service
+      dockerfile: Dockerfile
+    env_file:
+      - .env.staging

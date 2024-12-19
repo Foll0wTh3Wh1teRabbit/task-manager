@@ -60,6 +60,9 @@ subprojects {
         testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     }
 
+    jar.enabled = true
+    bootJar.enabled = false
+
     test {
         useJUnitPlatform()
     }

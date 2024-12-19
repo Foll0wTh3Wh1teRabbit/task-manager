@@ -1,0 +1,23 @@
+application:
+  base-url: http://${BASE_URL}
+  email:
+    from: ${EMAIL_FROM}
+  token:
+    signing:
+      key: ${TOKEN}
+
+spring:
+  datasource:
+    hikari:
+      username: ${POSTGRES_USER}
+      password: ${POSTGRES_PASSWORD}
+    url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+logging:
+  level:
+    root: debug

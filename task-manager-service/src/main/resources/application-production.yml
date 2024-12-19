@@ -1,0 +1,19 @@
+application:
+  base-url: http://${NGINX_HOST}:${NGINX_PORT}/task-manager
+  email:
+    from: ${EMAIL_FROM}
+  token:
+    signing:
+      key: ${TOKEN}
+
+spring:
+  datasource:
+    hikari:
+      username: ${POSTGRES_USER}
+      password: ${POSTGRES_PASSWORD}
+    url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
