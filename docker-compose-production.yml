@@ -24,10 +24,6 @@ services:
     image: postgres
     env_file:
       - .env.prod
-    environment:
-      POSTGRES_DB: ${DB_NAME}
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
 
   task-manager-service-1:
     container_name: task-manager-service-1
