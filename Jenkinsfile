@@ -6,14 +6,24 @@ pipeline {
                 git 'https://github.com/Foll0wTh3Wh1teRabbit/task-manager.git'
             }
         }
+
         stage('Build') {
             steps {
-                sh './gradlew clean build' // Use 'mvn clean install' if using Maven
+                sh './gradlew clean build'
             }
         }
+
         stage('Test') {
             steps {
-                sh './gradlew test' // Use 'mvn test' if using Maven
+                sh './gradlew test'
+            }
+        }
+
+        steps('Deploy') {
+            steps {
+                sh """
+
+                """
             }
         }
     }
