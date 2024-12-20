@@ -58,4 +58,4 @@ jobs:
       # Выполняем docker-compose на удаленном сервере
       - name: Deploy with Docker Compose
         run: |
-          ssh root@185.121.134.83 "cd /task-manager && docker-compose down && docker-compose -f docker-compose-production.yml up -d"
+          ssh root@185.121.134.83 "cd /task-manager && docker-compose -f docker-compose-production.yml down && docker-compose -f docker-compose-production.yml up -d"
