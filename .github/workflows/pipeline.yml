@@ -18,7 +18,8 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
-          java-version: 17 # Укажите версию Java, подходящую для вашего проекта
+          java-version: 21 # Укажите версию Java, подходящую для вашего проекта
+          distribution: 'temurin'
 
       # Кэшируем Gradle зависимости
       - name: Cache Gradle dependencies
