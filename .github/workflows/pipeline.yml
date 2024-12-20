@@ -43,18 +43,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Устанавливаем SSH для подключения к удаленному серверу
-      - name: Install SSH key
-        uses: shimataro/ssh-key-action@v2
+      - name: Start ssh-agent
+        uses: webfactory/ssh-agent@v0
         with:
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          passphrase: ${{ secrets.SSH_PASSPHRASE }}
-          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          ssh-passphrase: ${{ secrets.SSH_PASSPHRASE }}
 
-      # Копируем проект на удаленный сервер
-      - name: Copy project files to remote server
-        run: |
-          rsync -avz --exclude='.git/' . root@185.121.134.83:/task-manager
+      - name: Deploy via rsync
+        run: rsync -avz --exclude='.git/' . root@185.121.134.83:/task-manager
 
       # Выполняем docker-compose на удаленном сервере
       - name: Deploy with Docker Compose
