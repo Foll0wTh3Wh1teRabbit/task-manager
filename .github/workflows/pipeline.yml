@@ -47,8 +47,9 @@ jobs:
       - name: Install SSH key
         uses: shimataro/ssh-key-action@v2
         with:
-          key: ${{ secrets.SSH_PRIVATE_KEY }} # Личный SSH-ключ
-          known_hosts: ${{ secrets.KNOWN_HOSTS }} # Хосты сервера
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}
 
       # Копируем проект на удаленный сервер
       - name: Copy project files to remote server
