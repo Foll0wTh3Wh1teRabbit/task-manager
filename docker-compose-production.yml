@@ -90,6 +90,3 @@ services:
       - ~/.env.prod
     depends_on:
       - postgres
-
-volumes:
-  postgres_data:
