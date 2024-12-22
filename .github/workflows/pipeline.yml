@@ -61,5 +61,5 @@ jobs:
           ssh root@185.121.134.83 "rm -rf task-manager && \
           git clone https://github.com/Foll0wTh3Wh1teRabbit/task-manager.git && \
           cd /task-manager && \
-          ./gradlew build -x test && \
+          gradle build -x test && \
           docker-compose -f docker-compose-production.yml down && docker-compose -f docker-compose-production.yml up -d"
