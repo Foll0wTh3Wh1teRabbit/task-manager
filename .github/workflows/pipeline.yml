@@ -58,4 +58,7 @@ jobs:
       # Выполняем docker-compose на удаленном сервере
       - name: Deploy with Docker Compose
         run: |
-          ssh root@185.121.134.83 "cd /task-manager && git pull && ./gradlew build -x test && docker-compose -f docker-compose-production.yml down && docker-compose -f docker-compose-production.yml up -d"
+          ssh root@185.121.134.83 "rm -rf task-manager && \
+          git clone https://github.com/Foll0wTh3Wh1teRabbit/task-manager.git && \
+          ./gradlew build -x test && \
+          docker-compose -f docker-compose-production.yml down && docker-compose -f docker-compose-production.yml up -d"
