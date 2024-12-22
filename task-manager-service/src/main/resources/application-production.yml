@@ -1,5 +1,5 @@
 application:
-  base-url: http://${NGINX_HOST}:${NGINX_PORT}/task-manager
+  base-url: http://${NGINX_DOMAIN}/task-manager
   email:
     from: ${EMAIL_FROM}
   token:
