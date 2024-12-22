@@ -51,6 +51,10 @@ services:
       dockerfile: Dockerfile
     env_file:
       - .env.staging
+    depends_on:
+      - postgres
+      - task-manager-service-1
+      - task-manager-service-2
   planning-service-2:
     container_name: planning-service-2
     build:
@@ -58,6 +62,10 @@ services:
       dockerfile: Dockerfile
     env_file:
       - .env.staging
+    depends_on:
+      - postgres
+      - task-manager-service-1
+      - task-manager-service-2
   planning-service-3:
     container_name: planning-service-3
     build:
@@ -65,6 +73,10 @@ services:
       dockerfile: Dockerfile
     env_file:
       - .env.staging
+    depends_on:
+      - postgres
+      - task-manager-service-1
+      - task-manager-service-2
   planning-service-4:
     container_name: planning-service-4
     build:
@@ -72,3 +84,7 @@ services:
       dockerfile: Dockerfile
     env_file:
       - .env.staging
+    depends_on:
+      - postgres
+      - task-manager-service-1
+      - task-manager-service-2
