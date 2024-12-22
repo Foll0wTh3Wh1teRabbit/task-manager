@@ -24,6 +24,8 @@ services:
     image: postgres
     env_file:
       - ~/.env.prod
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
 
   task-manager-service-1:
     container_name: task-manager-service-1
@@ -34,6 +36,10 @@ services:
       - ~/.env.prod
     depends_on:
       - postgres
+      - planning-service-1
+      - planning-service-2
+      - planning-service-3
+      - planning-service-4
   task-manager-service-2:
     container_name: task-manager-service-2
     build:
@@ -43,6 +49,10 @@ services:
       - ~/.env.prod
     depends_on:
       - postgres
+      - planning-service-1
+      - planning-service-2
+      - planning-service-3
+      - planning-service-4
 
   planning-service-1:
     container_name: planning-service-1
@@ -53,8 +63,6 @@ services:
       - ~/.env.prod
     depends_on:
       - postgres
-      - task-manager-service-1
-      - task-manager-service-2
   planning-service-2:
     container_name: planning-service-2
     build:
@@ -64,8 +72,6 @@ services:
       - ~/.env.prod
     depends_on:
       - postgres
-      - task-manager-service-1
-      - task-manager-service-2
   planning-service-3:
     container_name: planning-service-3
     build:
@@ -75,8 +81,6 @@ services:
       - ~/.env.prod
     depends_on:
       - postgres
-      - task-manager-service-1
-      - task-manager-service-2
   planning-service-4:
     container_name: planning-service-4
     build:
@@ -86,5 +90,6 @@ services:
       - ~/.env.prod
     depends_on:
       - postgres
-      - task-manager-service-1
-      - task-manager-service-2
+
+volumes:
+  postgres_data:
