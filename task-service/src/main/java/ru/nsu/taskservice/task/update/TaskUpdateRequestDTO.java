@@ -3,7 +3,6 @@ package ru.nsu.taskservice.task.update;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.nsu.common.dto.RelationDTO;
 import ru.nsu.common.dto.UnboundRelationDTO;
 import ru.nsu.common.enumerated.TaskPriority;
 
@@ -27,7 +26,7 @@ public class TaskUpdateRequestDTO {
 
     private Boolean isCompleted;
 
-    private List<RelationDTO> relationsToRemove;
+    private List<UnboundRelationDTO> relationsToRemove;
 
     private List<UnboundRelationDTO> relationsToAdd;
 

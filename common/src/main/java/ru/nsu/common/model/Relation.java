@@ -43,4 +43,10 @@ public class Relation {
     @JoinColumn(name = "task_to_id", referencedColumnName = "id", nullable = false)
     private Task taskTo;
 
+    public Relation(Task taskFrom, Task taskTo, RelationType relationType) {
+        this.taskFrom = taskFrom;
+        this.taskTo = taskTo;
+        this.relationType = relationType;
+    }
+
 }

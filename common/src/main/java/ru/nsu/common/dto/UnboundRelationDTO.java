@@ -14,4 +14,14 @@ public class UnboundRelationDTO {
 
     private RelationType relationType;
 
+    public RelationType getReversedRelationType() {
+        return switch (relationType) {
+            case PRECEDES -> RelationType.FOLLOWS;
+            case FOLLOWS -> RelationType.PRECEDES;
+
+            case IS_PART_OF -> RelationType.CONTAINS;
+            case CONTAINS -> RelationType.IS_PART_OF;
+        };
+    }
+
 }
