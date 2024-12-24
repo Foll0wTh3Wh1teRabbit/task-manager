@@ -32,7 +32,7 @@ jobs:
 
       # Запускаем тесты с помощью Gradle
       - name: Run tests
-        run: ./gradlew test
+        run: gradle test
 
   deploy:
     # Этот шаг выполняется только после успешного завершения тестов
